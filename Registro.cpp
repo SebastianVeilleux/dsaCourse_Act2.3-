@@ -56,6 +56,7 @@ void Registro::leerRegistro(){
 }
 
 MyNodoLL* Registro::sequentialSearch(string busq){
+    istringstream split(busq);
     string strPIp;
     int pIp;
     string strSIp;
@@ -67,15 +68,15 @@ MyNodoLL* Registro::sequentialSearch(string busq){
     string strPuerto;
     int puerto;
 
-    getline(busq, strPIp, '.');
+    getline(split, strPIp, '.');
     pIp = stoi(strPIp);
-    getline(busq, strSIp, '.');
+    getline(split, strSIp, '.');
     sIp = stoi(strSIp);
-    getline(busq, strTIp, '.');
+    getline(split, strTIp, '.');
     tIp = stoi(strTIp);
-    getline(busq, strCIp, ':');
+    getline(split, strCIp, ':');
     cIp = stoi(strCIp);
-    getline(busq, strPuerto, '\n');
+    getline(split, strPuerto, '\n');
     puerto = stoi(strPuerto);
 
     MyNodoLL* temp = this->head;
