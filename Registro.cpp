@@ -91,10 +91,13 @@ MyNodoLL* Registro::sequentialSearch(string busq){
 }
 
 void Registro::crearArchivo(){
+    MyNodoLL* current; 
+    current = head;
     ofstream file;
     file.open("bitacoraOrdenada1.3-eq4.txt");
     for (int i =0; i<this->size; i++) {
-        file << head->error->imprimeError();
+        file << current->error->imprimeError();
+        current=current->next;
     }
     file.close();
 }
@@ -132,7 +135,7 @@ void Registro::crearArchivoEspecifico(string busqI, string busqF){
 
     file.open("salida" + strNumBusq + "-eq4.txt");
     while(current->error->getPIp() != pIpF && current->error->getSIp() != sIpF && current->error->getTIp() != tIpF && current->error->getCIp() != cIpF){
-        file << head->error->imprimeError();
+        file << current->error->imprimeError();
         current=current->next;
     }
     this->numBusq ++;
