@@ -31,7 +31,7 @@ class Registro{
         void ordenar(int ini, int fin);//cambiar para listas enlazadas
         void ordenar();//cambiar para listas enlazadas
         void crearArchivo();
-        void crearArchivoEspecifico(string mesI, string mesF, int diaI, int diaF);//cambiar para listas enlazadas
+        void crearArchivoEspecifico(string busqI, string busqF);//cambiar para listas enlazadas
         MyNodoLL* sequentialSearch(string busq);
 };
 
