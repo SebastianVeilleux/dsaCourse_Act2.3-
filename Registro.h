@@ -32,7 +32,9 @@ class Registro{
         void ordenar();//cambiar para listas enlazadas
         void crearArchivo();
         void crearArchivoEspecifico(string mesI, string mesF, int diaI, int diaF);//cambiar para listas enlazadas
+        void ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp);
         MyNodoLL* sequentialSearch(string busq);
+        MyNodoLL* sequentialSearchFin(string busq, MyNodoLL* nodo);
 };
 
 #endif

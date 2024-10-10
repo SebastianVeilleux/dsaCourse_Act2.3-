@@ -55,7 +55,7 @@ void Registro::leerRegistro(){
     archivoVideos.close();
 }
 
-MyNodoLL* Registro::sequentialSearch(string busq){
+void Registro::ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp){
     istringstream split(busq);
     string strPIp;
     int pIp;
@@ -65,27 +65,51 @@ MyNodoLL* Registro::sequentialSearch(string busq){
     int tIp;
     string strCIp;
     int cIp;
-    string strPuerto;
-    int puerto;
 
     getline(split, strPIp, '.');
-    pIp = stoi(strPIp);
+    *pIp = stoi(strPIp);
     getline(split, strSIp, '.');
-    sIp = stoi(strSIp);
+    *sIp = stoi(strSIp);
     getline(split, strTIp, '.');
-    tIp = stoi(strTIp);
-    getline(split, strCIp, ':');
-    cIp = stoi(strCIp);
-    getline(split, strPuerto, '\n');
-    puerto = stoi(strPuerto);
+    *tIp = stoi(strTIp);
+    getline(split, strCIp, ':');//va a terminar en : o en \n
+    *cIp = stoi(strCIp);
+}
+
+MyNodoLL* Registro::sequentialSearch(string busq){
+    int pIp;
+    int sIp;
+    int tIp;
+    int cIp;
+
+    ipAInt(busq, &pIp, &sIp, &tIp, &cIp);
 
     MyNodoLL* temp = this->head;
-    while(temp->next == nullptr){
-        if(temp->error->getPIp() >= pIp && temp->error->getSIp() >= sIp && temp->error->getTIp() >= tIp && temp->error->getCIp() >= cIp && temp->error->getPuerto() >= puerto){
-            return temp;
-        }else{
-            temp = temp->next;
+    while(temp->next != nullptr){
+        if(temp->error->getPIp() >= pIp){
+            if(temp->error->getCIp() >= cIp){
+                if(temp->error->getTIp() >= tIp){
+                    if(temp->error->getSIp() >= sIp){
+                        return temp;
+                    }
+                }
+            }
         }
+        temp = temp->next;
     }
     return nullptr;
+}
+
+MyNodoLL* Registro::sequentialSearchFin(string busq, MyNodoLL* nodo){
+    int pIp;
+    int sIp;
+    int tIp;
+    int cIp;
+    
+    ipAInt(busq, &pIp, &sIp, &tIp, &cIp);
+
+    while((nodo->error->getPIp() == pIp && nodo->error->getSIp() == sIp && nodo->error->getTIp() == tIp && nodo->error->getCIp() == cIp) || nodo->next != nullptr){
+        nodo = nodo->next;
+    }
+    return nodo;
 }
