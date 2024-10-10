@@ -134,10 +134,38 @@ void Registro::crearArchivoEspecifico(string busqI, string busqF){
     ofstream file;
 
     file.open("salida" + strNumBusq + "-eq4.txt");
-    while(current->error->getPIp() != pIpF && current->error->getSIp() != sIpF && current->error->getTIp() != tIpF && current->error->getCIp() != cIpF){
-        file << current->error->imprimeError();
-        current=current->next;
-    }
+    while (current != nullptr) { 
+        if (current->error->getPIp() < pIpF) { 
+            file << current->error->imprimeError(); 
+        } else if (current->error->getPIp() == pIpF) { 
+            if (current->error->getSIp() < sIpF) { 
+                file << current->error->imprimeError(); 
+            } else if (current->error->getSIp() == sIpF) { 
+                if (current->error->getTIp() < tIpF) { 
+                    file << current->error->imprimeError(); 
+                } else if (current->error->getTIp() == tIpF) { 
+                    if (current->error->getCIp() < cIpF) { 
+                        file << current->error->imprimeError(); 
+                    } else if(current->error->getCIp() == cIpF){
+                        if(current->error->getPuerto() <=puertoF){
+                            file << current->error->imprimeError();
+                        } else {
+                            break;
+                        }
+                    } else { 
+                        break; 
+                    } 
+                } else { 
+                    break; 
+                } 
+            } else { 
+                break; 
+            } 
+        } else { 
+            break; 
+        } 
+        current = current->next; 
+    } 
     this->numBusq ++;
     file.close();
 }
