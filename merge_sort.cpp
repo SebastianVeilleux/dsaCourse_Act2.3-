@@ -1,93 +1,79 @@
 #include <iostream>
+#include <vector>
+
 //g++ -std=c++17 merge_sort.cpp && ./a.out
 
 using namespace std;
 
-// Merges two subarrays of arr[].
-// First subarray is arr[left..mid]
-// Second subarray is arr[mid+1..right]
-void merge(vector<int>& arr, int left, 
-                     int mid, int right)
-{
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+struct Node{
+    int data;
+    Node* next; 
 
-    // Create temp vectors
-    vector<int> L(n1), R(n2);
+    Node(int val){
+        data = val;
+        next = nullptr;
+    }
+};
 
-    // Copy data to temp vectors L[] and R[]
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[left + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[mid + 1 + j];
+class LinkedList{
+    public: 
 
-    int i = 0, j = 0;
-    int k = left;
+    Node* head; // Deberia ser privado pero para fines de la tarea lo dejaremos publico
+    LinkedList() : head(nullptr){} // inicialilzar lista vacia
 
-    // Merge the temp vectors back 
-    // into arr[left..right]
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            i++;
+    // Insertar al final de la lista
+    void insert_last(int data){
+        Node* newNode = new Node(data);
+
+        if(head == nullptr){ // si la lista esta vacia asignar a head el nuevo nodo
+            head = newNode;
+        }else{
+            // Recorrer lista para encontrar el ultimo nodo
+            Node* current = head;
+            while(current->next != nullptr){
+                current = current->next;
+            }
+            current->next = newNode;
         }
-        else {
-            arr[k] = R[j];
-            j++;
+
+    }
+
+    void printList() {
+        Node* current = head;
+
+        while(current->next != nullptr){
+            cout << current->data << " " << endl;
         }
-        k++;
     }
 
-    // Copy the remaining elements of L[], 
-    // if there are any
-    while (i < n1) {
-        arr[k] = L[i];
-        i++;
-        k++;
+    // this idea was taken from https://medium.com/@arifimran5/fast-and-slow-pointer-pattern-in-linked-list-43647869ac99
+    Node* getMiddle(Node* head){
+        if(head == nullptr){
+            return nullptr;
+        }
+
+        Node* fast = head;
+        Node* slow = head;
+
+        while(fast != nullptr && fast->next != nullptr){
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+
+        return slow;
     }
 
-    // Copy the remaining elements of R[], 
-    // if there are any
-    while (j < n2) {
-        arr[k] = R[j];
-        j++;
-        k++;
-    }
+};
+
+Node* merge(){
+
 }
 
-// begin is for left index and end is right index
-// of the sub-array of arr to be sorted
-void mergeSort(vector<int>& arr, int left, int right)
-{
-    if (left >= right)
-        return;
+Node* mergeSort(){
 
-    int mid = left + (right - left) / 2;
-    mergeSort(arr, left, mid);
-    mergeSort(arr, mid + 1, right);
-    merge(arr, left, mid, right);
 }
 
-// Function to print a vector
-void printVector(vector<int>& arr)
-{
-    for (int i = 0; i < arr.size(); i++)
-        cout << arr[i] << " ";
-    cout << endl;
-}
+int main(){
 
-// Driver code
-int main()
-{
-    vector<int> arr = { 12, 11, 13, 5, 6, 7 };
-    int n = arr.size();
-
-    cout << "Given vector is \n";
-    printVector(arr);
-
-    mergeSort(arr, 0, n - 1);
-
-    cout << "\nSorted vector is \n";
-    printVector(arr);
     return 0;
 }
