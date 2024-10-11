@@ -22,7 +22,7 @@ struct MyNodoLL{
 class Registro{
     private:
         int numBusq = 1;
-        int size;
+        int size = 0;
         MyNodoLL *head,
         *tail;
     public:
