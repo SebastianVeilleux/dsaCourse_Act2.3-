@@ -119,3 +119,55 @@ MyNodoLL* Registro::sequentialSearchFin(string busq, MyNodoLL* nodo){
     }
     return nodo;
 }
+
+void Registro::crearArchivo(){
+    MyNodoLL* current; 
+    current = head;
+    ofstream file;
+    file.open("bitacoraOrdenada1.3-eq4.txt");
+    for (int i =0; i<this->size; i++) {
+        file << current->error->imprimeError();
+        current=current->next;
+    }
+    file.close();
+}
+
+void Registro::crearArchivoEspecifico(string busqI, string busqF){
+    string strNumBusq;
+    strNumBusq = to_string(this->numBusq);
+    MyNodoLL* current; 
+    int num_doc = 1;
+    current = sequentialSearch(busqI);
+    istringstream split(busqF);
+    string strPIpF;
+    int pIpF;
+    string strSIpF;
+    int sIpF;
+    string strTIpF;
+    int tIpF;
+    string strCIpF;
+    int cIpF;
+    string strPuertoF;
+    int puertoF;
+
+    getline(split, strPIpF, '.');
+    pIpF = stoi(strPIpF);
+    getline(split, strSIpF, '.');
+    sIpF = stoi(strSIpF);
+    getline(split, strTIpF, '.');
+    tIpF = stoi(strTIpF);
+    getline(split, strCIpF, ':');
+    cIpF = stoi(strCIpF);
+    getline(split, strPuertoF, '\n');
+    puertoF = stoi(strPuertoF);
+
+    ofstream file;
+
+    file.open("salida" + strNumBusq + "-eq4.txt");
+    while(current->error->getPIp() != pIpF && current->error->getSIp() != sIpF && current->error->getTIp() != tIpF && current->error->getCIp() != cIpF){
+        file << current->error->imprimeError();
+        current=current->next;
+    }
+    this->numBusq ++;
+    file.close();
+}
