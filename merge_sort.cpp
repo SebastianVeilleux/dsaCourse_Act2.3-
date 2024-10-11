@@ -52,8 +52,8 @@ class LinkedList{
             return nullptr;
         }
 
-        Node* fast = head;
-        Node* slow = head;
+        Node* fast = head; // ->next->next
+        Node* slow = head; // ->next
 
         while(fast != nullptr && fast->next != nullptr){
             fast = fast->next->next;
@@ -70,7 +70,7 @@ Node* merge(){
 }
 
 Node* mergeSort(){
-
+    
 }
 
 int main(){
