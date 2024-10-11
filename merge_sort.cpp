@@ -1,12 +1,12 @@
 #include <iostream>
-#include <vector>
-// codigo por su puesto no gpeteado
-
 using namespace std;
+// Codigo para nada hecho por GPT
+
+// g++ -std=c++17 merge_sort.cpp && ./a.out
 
 struct Node {
     int data;
-    Node* next; 
+    Node* next;
 
     Node(int val) {
         data = val;
@@ -16,17 +16,17 @@ struct Node {
 
 class LinkedList {
 public:
-    Node* head;
-    
-    LinkedList() : head(nullptr) {}  // Initialize empty list
+    Node* head; // Should be private, but for task purposes we'll leave it public
+    LinkedList() : head(nullptr) {} // Initialize empty list
 
-    // Insert a node at the end of the list
+    // Insert at the end of the list
     void insert_last(int data) {
         Node* newNode = new Node(data);
 
-        if (head == nullptr) {
+        if (head == nullptr) { // If the list is empty, assign newNode to head
             head = newNode;
         } else {
+            // Traverse list to find the last node
             Node* current = head;
             while (current->next != nullptr) {
                 current = current->next;
@@ -35,101 +35,86 @@ public:
         }
     }
 
+    // Print the list
     void printList() {
         Node* current = head;
-
         while (current != nullptr) {
             cout << current->data << " ";
             current = current->next;
         }
         cout << endl;
     }
-
-    // Static function to get the middle of the list
-    static Node* getMiddle(Node* head) {
-        if (head == nullptr) {
-            return nullptr;
-        }
-
-        Node* fast = head; // ->next->next
-        Node* slow = head; // ->next
-
-        while (fast != nullptr && fast->next != nullptr) {
-            fast = fast->next->next;
-            slow = slow->next;
-        }
-
-        return slow;
-    }
 };
 
-Node* merge(Node* left, Node* right) {
-    if (left == nullptr) {
-        return right;
-    }
-    if (right == nullptr) {
-        return left;
-    }
+// Function to split the singly linked list into two halves
+Node* split(Node* head) {
+    Node* fast = head;
+    Node* slow = head;
 
-    Node* result = nullptr;
-
-    // Compare the data to decide the merge order
-    if (left->data <= right->data) {
-        result = left;
-        result->next = merge(left->next, right);
-    } else {
-        result = right;
-        result->next = merge(left, right->next);
+    // Move fast pointer two steps and slow pointer one step
+    while (fast != nullptr && fast->next != nullptr) {
+        fast = fast->next->next;
+        if (fast != nullptr) {
+            slow = slow->next;
+        }
     }
 
-    return result;
+    // Split the list into two halves
+    Node* temp = slow->next;
+    slow->next = nullptr;
+    return temp;
 }
 
-<<<<<<< HEAD
-Node* mergeSort(){
-    
-=======
-Node* mergeSort(Node* head) {
-    // Base case: If head is NULL or only one element in the list
-    if (head == nullptr || head->next == nullptr) {
-        return head;
+// Function to merge two sorted singly linked lists
+Node* merge(Node* first, Node* second) {
+    // If either list is empty, return the other list
+    if (first == nullptr) return second;
+    if (second == nullptr) return first;
+
+    // Pick the smaller value between first and second nodes
+    if (first->data < second->data) {
+        // Recursively merge the rest of the lists and link the result to the current node
+        first->next = merge(first->next, second);
+        return first;
+    } else {
+        // Recursively merge the rest of the lists and link the result to the current node
+        second->next = merge(first, second->next);
+        return second;
     }
+}
 
-    // Find the middle of the list
-    Node* middle = LinkedList::getMiddle(head);
-    
+// Function to perform merge sort on a singly linked list
+Node* MergeSort(Node* head) {
+    // Base case: if the list is empty or has only one node, it's already sorted
+    if (head == nullptr || head->next == nullptr)
+        return head;
+
     // Split the list into two halves
-    Node* secondHalf = middle->next;
-    middle->next = nullptr; // Break the list into two halves
+    Node* second = split(head);
 
-    // Recursively sort both halves
-    Node* left = mergeSort(head);
-    Node* right = mergeSort(secondHalf);
+    // Recursively sort each half
+    head = MergeSort(head);
+    second = MergeSort(second);
 
-    // Merge the sorted halves
-    return merge(left, right);
->>>>>>> 6b7b3345e7da0b88025e8ebf68190c661d9881db
+    // Merge the two sorted halves
+    return merge(head, second);
 }
 
 int main() {
     LinkedList list;
 
-    // Insert elements into the linked list
-    list.insert_last(21);
-    list.insert_last(11);
-    list.insert_last(13);
-    list.insert_last(5);
-    list.insert_last(6);
-    list.insert_last(7);
+    // Insert nodes into the linked list
+    list.insert_last(9999);
+    list.insert_last(1000);
+    list.insert_last(1000);
+    list.insert_last(2000);
 
-    // Print original list
     cout << "Original List:" << endl;
     list.printList();
 
-    // Sort the list using mergeSort
-    list.head = mergeSort(list.head);
+    // Sort the list using MergeSort
+    list.head = MergeSort(list.head);
 
-    // Print sorted list
     cout << "Sorted List:" << endl;
     list.printList();
 
