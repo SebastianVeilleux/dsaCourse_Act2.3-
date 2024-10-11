@@ -14,38 +14,6 @@ struct Node {
     }
 };
 
-class LinkedList {
-public:
-    Node* head; // Should be private, but for task purposes we'll leave it public
-    LinkedList() : head(nullptr) {} // Initialize empty list
-
-    // Insert at the end of the list
-    void insert_last(int data) {
-        Node* newNode = new Node(data);
-
-        if (head == nullptr) { // If the list is empty, assign newNode to head
-            head = newNode;
-        } else {
-            // Traverse list to find the last node
-            Node* current = head;
-            while (current->next != nullptr) {
-                current = current->next;
-            }
-            current->next = newNode;
-        }
-    }
-
-    // Print the list
-    void printList() {
-        Node* current = head;
-        while (current != nullptr) {
-            cout << current->data << " ";
-            current = current->next;
-        }
-        cout << endl;
-    }
-};
-
 // Function to split the singly linked list into two halves
 Node* split(Node* head) {
     Node* fast = head;
@@ -100,23 +68,3 @@ Node* MergeSort(Node* head) {
     return merge(head, second);
 }
 
-int main() {
-    LinkedList list;
-
-    // Insert nodes into the linked list
-    list.insert_last(9999);
-    list.insert_last(1000);
-    list.insert_last(1000);
-    list.insert_last(2000);
-
-    cout << "Original List:" << endl;
-    list.printList();
-
-    // Sort the list using MergeSort
-    list.head = MergeSort(list.head);
-
-    cout << "Sorted List:" << endl;
-    list.printList();
-
-    return 0;
-}

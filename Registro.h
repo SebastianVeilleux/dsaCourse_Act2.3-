@@ -1,5 +1,6 @@
 //Héctor Eduardo Ayala Gudiño A01638996
 //Luis Fernando Rojo Valdes A01640584
+// Sebastian Alejandro Veilleux Amaya A01644977
 #ifndef REGISTRO_H
 #define REGISTRO_H
 
