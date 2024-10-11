@@ -1,4 +1,5 @@
 //Héctor Eduardo Ayala Gudiño A01638996
+//Luis Fernando Rojo Valdes A01640584
 #include "Registro.h"
 #include "Error.h"
 
