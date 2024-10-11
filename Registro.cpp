@@ -3,7 +3,7 @@
 #include "Registro.h"
 #include "Error.h"
 
-Registro::Registro(){}
+Registro::Registro() : head(nullptr), tail(nullptr), size(0) {}
 
 Registro::~Registro() {
     MyNodoLL* current = head;
