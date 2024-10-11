@@ -108,7 +108,13 @@ MyNodoLL* Registro::sequentialSearchFin(string busq, MyNodoLL* nodo){
     
     ipAInt(busq, &pIp, &sIp, &tIp, &cIp);
 
-    while((nodo->error->getPIp() == pIp && nodo->error->getSIp() == sIp && nodo->error->getTIp() == tIp && nodo->error->getCIp() == cIp) || nodo->next != nullptr){
+    while(nodo->next != nullptr){
+        if(nodo->error->getPIp() == pIp && nodo->error->getSIp() == sIp && nodo->error->getTIp() == tIp && nodo->error->getCIp() == cIp){
+            while(nodo->next->error->getPIp() == pIp && nodo->next->error->getSIp() == sIp && nodo->next->error->getTIp() == tIp && nodo->next->error->getCIp() == cIp && nodo != nullptr){
+                nodo = nodo->next;
+            }
+            return nodo;
+        }
         nodo = nodo->next;
     }
     return nodo;
