@@ -168,12 +168,6 @@ void Registro::crearArchivoEspecifico(string busqI, string busqF){
                 } else if (current->error->getTIp() == tIpF) { 
                     if (current->error->getCIp() < cIpF) { 
                         file << current->error->imprimeError(); 
-                    } else if(current->error->getCIp() == cIpF){
-                        if(current->error->getPuerto() <=puertoF){
-                            file << current->error->imprimeError();
-                        } else {
-                            break;
-                        }
                     } else { 
                         break; 
                     } 
