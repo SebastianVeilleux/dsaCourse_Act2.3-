@@ -86,21 +86,28 @@ MyNodoLL* Registro::sequentialSearch(string busq){
 
     MyNodoLL* temp = this->head;
     while(temp->next != nullptr){
-        if(temp->error->getPIp() >= pIp){
+        if(temp->error->getPIp() == pIp){
             if(temp->error->getCIp() >= cIp){
                 if(temp->error->getTIp() >= tIp){
                     if(temp->error->getSIp() >= sIp){
                         return temp;
+                    }else if(temp->error->getSIp() > pIp){
+                        return temp;
                     }
+                }else if(temp->error->getTIp() > pIp){
+                    return temp;
                 }
+            }else if(temp->error->getCIp() > pIp){
+                return temp;
             }
+        }else if(temp->error->getPIp() > pIp){
+            return temp;
         }
-        temp = temp->next;
     }
     return nullptr;
 }
 
-MyNodoLL* Registro::sequentialSearchFin(string busq, MyNodoLL* nodo){
+/*MyNodoLL* Registro::sequentialSearchFin(string busq, MyNodoLL* nodo){
     int pIp;
     int sIp;
     int tIp;
@@ -118,7 +125,7 @@ MyNodoLL* Registro::sequentialSearchFin(string busq, MyNodoLL* nodo){
         nodo = nodo->next;
     }
     return nodo;
-}
+}*/
 
 void Registro::crearArchivo(){
     MyNodoLL* current; 
@@ -136,38 +143,50 @@ void Registro::crearArchivoEspecifico(string busqI, string busqF){
     string strNumBusq;
     strNumBusq = to_string(this->numBusq);
     MyNodoLL* current; 
-    int num_doc = 1;
     current = sequentialSearch(busqI);
-    istringstream split(busqF);
-    string strPIpF;
+    
     int pIpF;
-    string strSIpF;
     int sIpF;
-    string strTIpF;
     int tIpF;
-    string strCIpF;
     int cIpF;
-    string strPuertoF;
-    int puertoF;
 
-    getline(split, strPIpF, '.');
-    pIpF = stoi(strPIpF);
-    getline(split, strSIpF, '.');
-    sIpF = stoi(strSIpF);
-    getline(split, strTIpF, '.');
-    tIpF = stoi(strTIpF);
-    getline(split, strCIpF, ':');
-    cIpF = stoi(strCIpF);
-    getline(split, strPuertoF, '\n');
-    puertoF = stoi(strPuertoF);
+    ipAInt(busqF, &pIpF, &sIpF, &tIpF, &cIpF);
 
     ofstream file;
 
     file.open("salida" + strNumBusq + "-eq4.txt");
-    while(current->error->getPIp() != pIpF && current->error->getSIp() != sIpF && current->error->getTIp() != tIpF && current->error->getCIp() != cIpF){
-        file << current->error->imprimeError();
-        current=current->next;
-    }
+    while (current != nullptr) { 
+        if (current->error->getPIp() < pIpF) { 
+            file << current->error->imprimeError(); 
+        } else if (current->error->getPIp() == pIpF) { 
+            if (current->error->getSIp() < sIpF) { 
+                file << current->error->imprimeError(); 
+            } else if (current->error->getSIp() == sIpF) { 
+                if (current->error->getTIp() < tIpF) { 
+                    file << current->error->imprimeError(); 
+                } else if (current->error->getTIp() == tIpF) { 
+                    if (current->error->getCIp() < cIpF) { 
+                        file << current->error->imprimeError(); 
+                    } else if(current->error->getCIp() == cIpF){
+                        if(current->error->getPuerto() <=puertoF){
+                            file << current->error->imprimeError();
+                        } else {
+                            break;
+                        }
+                    } else { 
+                        break; 
+                    } 
+                } else { 
+                    break; 
+                } 
+            } else { 
+                break; 
+            } 
+        } else { 
+            break; 
+        } 
+        current = current->next; 
+    } 
     this->numBusq ++;
     file.close();
 }
