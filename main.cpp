@@ -6,7 +6,7 @@
 // g++ main.cpp Registro.cpp Error.cpp && ./a.out
 // g++ main.cpp Error.cpp Registro.cpp && .\a.exe
 
-//Funcion con codigo de FreeCodeCamp para validar la fecha
+//Funcion para validar el input de la IP
 bool isValidIP(string busq) {
 
     regex datePattern("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
