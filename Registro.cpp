@@ -71,40 +71,47 @@ MyNodoLL* Registro::Merge(MyNodoLL* left, MyNodoLL* right) {
     if (left == nullptr) return right;
     if (right == nullptr) return left;
 
-    if (left->error->getPIp() == right->error->getPIp()) {
-        if (left->error->getSIp() == right->error->getSIp()) {
-            if (left->error->getTIp() == right->error->getTIp()) {
-                if (left->error->getCIp() == right->error->getCIp()) {
-                    if (left->error->getPuerto() <= right->error->getPuerto()) {
-                        left->next = Merge(left->next, right);
-                        return left;
-                    } else {
-                        right->next = Merge(left, right->next);
-                        return right;
-                    }
-                } else if (left->error->getCIp() < right->error->getCIp()) {
-                    left->next = Merge(left->next, right);
-                    return left;
-                } else {
-                    right->next = Merge(left, right->next);
-                    return right;
-                }
-            } else if (left->error->getTIp() < right->error->getTIp()) {
-                left->next = Merge(left->next, right);
-                return left;
-            } else {
-                right->next = Merge(left, right->next);
-                return right;
-            }
-        } else if (left->error->getSIp() < right->error->getSIp()) {
+    if(left->error->getPIp() < right->error->getPIp()){
+        left->next = Merge(left->next, right);
+        return left;
+    }else if(left->error->getPIp() == right->error->getPIp()){
+        if(left->error->getSIp() < right->error->getSIp()){
             left->next = Merge(left->next, right);
             return left;
-        } else {
+        }else if(left->error->getSIp() == right->error->getSIp()){
+            if(left->error->getTIp() < right->error->getTIp()){
+                left->next = Merge(left->next, right);
+                return left;
+            }else if(left->error->getTIp() == right->error->getTIp()){
+                if(left->error->getCIp() < right->error->getCIp()){
+                    left->next = Merge(left->next, right);
+                    return left;
+                }else if(left->error->getCIp() == right->error->getCIp()){
+                    if(left->error->getPuerto() < right->error->getPuerto()){
+                        left->next = Merge(left->next, right);
+                        return left;
+                    }else{
+                        right->next = Merge(left, right->next);
+                        return right;  
+                    }
+                }else{
+                    right->next = Merge(left, right->next);
+                    return right;  
+                }
+            }else{
+                right->next = Merge(left, right->next);
+                return right;  
+            }
+        }else{
             right->next = Merge(left, right->next);
             return right;
         }
+    }else{
+        right->next = Merge(left, right->next);
+        return right;
     }
 }
+
 
 MyNodoLL* Registro::findMiddle(MyNodoLL* head){
     if (head == nullptr || head->next == nullptr)
@@ -134,6 +141,10 @@ MyNodoLL* Registro::MergeSort(MyNodoLL* head) {
     right = MergeSort(right);
 
     return Merge(left, right);
+}
+
+void Registro::ordenar(){
+    MergeSort(this->head);
 }
 
 void Registro::ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp){

@@ -22,7 +22,7 @@ int main()
 {
     Registro r1;
     r1.leerRegistro();
-    //r1.ordenar();
+    r1.ordenar();
     r1.crearArchivo();
     
     while(true){

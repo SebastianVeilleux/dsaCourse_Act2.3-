@@ -33,6 +33,7 @@ class Registro{
         MyNodoLL* findMiddle(MyNodoLL* head);
         MyNodoLL* Merge(MyNodoLL* first, MyNodoLL* second);
         MyNodoLL* MergeSort(MyNodoLL* head);
+        void ordenar();
         // MERGE PASADO
             //void mezcla(int ini, int central, int fin);
             //void ordenar(int ini, int fin);
