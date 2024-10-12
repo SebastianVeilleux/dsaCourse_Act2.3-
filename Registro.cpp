@@ -217,7 +217,7 @@ void Registro::crearArchivo(){
     MyNodoLL* current; 
     current = head;
     ofstream file;
-    file.open("bitacoraOrdenada1.3-eq4.txt");
+    file.open("bitacoraOrdenadaIP-Eq4.txt");
     for (int i =0; i<this->size; i++) {
         file << current->error->imprimeError();
         current=current->next;
@@ -240,7 +240,7 @@ void Registro::crearArchivoEspecifico(string busqI, string busqF){
 
     ofstream file;
 
-    file.open("salida" + strNumBusq + "-eq4.txt");
+    file.open("salida" + strNumBusq + "-Eq4.txt");
     while (current != nullptr) { 
         if (current->error->getPIp() < pIpF) { 
             file << current->error->imprimeError(); 
