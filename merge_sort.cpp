@@ -14,12 +14,12 @@ struct Node {
     }
 };
 
-// Function to split the singly linked list into two halves
+
 Node* split(Node* head) {
     Node* fast = head;
     Node* slow = head;
 
-    // Move fast pointer two steps and slow pointer one step
+    
     while (fast != nullptr && fast->next != nullptr) {
         fast = fast->next->next;
         if (fast != nullptr) {
@@ -27,7 +27,7 @@ Node* split(Node* head) {
         }
     }
 
-    // Split the list into two halves
+    // desconecta la lista
     Node* temp = slow->next;
     slow->next = nullptr;
     return temp;

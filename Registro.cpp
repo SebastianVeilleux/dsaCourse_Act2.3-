@@ -35,10 +35,10 @@ void Registro::leerRegistro(){
     string strPuerto;
     int puerto;
     string razon;
-    
+
     while (getline(archivoVideos, linea)){
         stringstream ss(linea);
-        
+
         getline(ss, mes, ' ');
         getline(ss, dia, ' ');
         getline(ss, hora, ' ');
@@ -53,7 +53,7 @@ void Registro::leerRegistro(){
         getline(ss, strPuerto, ' ');
         puerto = stoi(strPuerto);
         getline(ss, razon, '\0');
-        
+
         this->size++;
         if(this->head == nullptr){
             this->head = this->tail = new MyNodoLL(new Error(mes, dia, hora, pIp, sIp, tIp, cIp, puerto, razon));
@@ -65,6 +65,75 @@ void Registro::leerRegistro(){
         }
     }
     archivoVideos.close();
+}
+
+MyNodoLL* Registro::Merge(MyNodoLL* left, MyNodoLL* right) {
+    if (left == nullptr) return right;
+    if (right == nullptr) return left;
+
+    if (left->error->getPIp() == right->error->getPIp()) {
+        if (left->error->getSIp() == right->error->getSIp()) {
+            if (left->error->getTIp() == right->error->getTIp()) {
+                if (left->error->getCIp() == right->error->getCIp()) {
+                    if (left->error->getPuerto() <= right->error->getPuerto()) {
+                        left->next = Merge(left->next, right);
+                        return left;
+                    } else {
+                        right->next = Merge(left, right->next);
+                        return right;
+                    }
+                } else if (left->error->getCIp() < right->error->getCIp()) {
+                    left->next = Merge(left->next, right);
+                    return left;
+                } else {
+                    right->next = Merge(left, right->next);
+                    return right;
+                }
+            } else if (left->error->getTIp() < right->error->getTIp()) {
+                left->next = Merge(left->next, right);
+                return left;
+            } else {
+                right->next = Merge(left, right->next);
+                return right;
+            }
+        } else if (left->error->getSIp() < right->error->getSIp()) {
+            left->next = Merge(left->next, right);
+            return left;
+        } else {
+            right->next = Merge(left, right->next);
+            return right;
+        }
+    }
+}
+
+MyNodoLL* Registro::findMiddle(MyNodoLL* head){
+    if (head == nullptr || head->next == nullptr)
+        return head;
+    
+    MyNodoLL* slow = head;
+    MyNodoLL* fast = head->next;
+
+    while(fast != nullptr && fast->next != nullptr){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+MyNodoLL* Registro::MergeSort(MyNodoLL* head) {
+    // caso base: si la lista está vacía o tiene solo un nodo, ya está ordenada
+    if (head == nullptr || head->next == nullptr)
+        return head;
+
+    MyNodoLL* middle = findMiddle(head);
+    MyNodoLL* right = middle->next;
+    middle->next = nullptr;
+
+    MyNodoLL* left = MergeSort(head);
+    right = MergeSort(right);
+
+    return Merge(left, right);
 }
 
 void Registro::ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp){
@@ -150,7 +219,7 @@ void Registro::crearArchivoEspecifico(string busqI, string busqF){
     strNumBusq = to_string(this->numBusq);
     MyNodoLL* current; 
     current = sequentialSearch(busqI);
-    
+
     int pIpF;
     int sIpF;
     int tIpF;
