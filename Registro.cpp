@@ -5,7 +5,7 @@
 
 Registro::Registro() : head(nullptr), tail(nullptr), size(0) {}
 
-Registro::~Registro() {
+/*Registro::~Registro() {
     MyNodoLL* current = head;
     while (current != nullptr) {
         MyNodoLL* next = current->next;
@@ -13,7 +13,7 @@ Registro::~Registro() {
         delete current;
         current = next;
     }
-}
+}*/
 
 void Registro::leerRegistro(){
     ifstream archivoVideos("bitacora.txt");
@@ -76,7 +76,7 @@ void Registro::ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp){
     *sIp = stoi(strSIp);
     getline(split, strTIp, '.');
     *tIp = stoi(strTIp);
-    getline(split, strCIp);//va a terminar en : o en \n
+    getline(split, strCIp, '\n');//va a terminar en : o en \n
     *cIp = stoi(strCIp);
 }
 
@@ -91,17 +91,17 @@ MyNodoLL* Registro::sequentialSearch(string busq){
     MyNodoLL* temp = this->head;
     while(temp != nullptr){
         if(temp->error->getPIp() == pIp){
-            if(temp->error->getCIp() >= cIp){
+            if(temp->error->getSIp() >= sIp){
                 if(temp->error->getTIp() >= tIp){
-                    if(temp->error->getSIp() >= sIp){
+                    if(temp->error->getCIp() >= cIp){
                         return temp;
-                    }else if(temp->error->getSIp() > pIp){
+                    }else if(temp->error->getCIp() > cIp){
                         return temp;
                     }
-                }else if(temp->error->getTIp() > pIp){
+                }else if(temp->error->getTIp() > tIp){
                     return temp;
                 }
-            }else if(temp->error->getCIp() > pIp){
+            }else if(temp->error->getSIp() > sIp){
                 return temp;
             }
         }else if(temp->error->getPIp() > pIp){

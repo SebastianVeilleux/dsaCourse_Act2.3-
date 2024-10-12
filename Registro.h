@@ -12,7 +12,7 @@ struct MyNodoLL{
     MyNodoLL* next;
 
     MyNodoLL(Error *error, MyNodoLL* next){
-        this->error = error;//?
+        this->error = error;
         this->next = next;
     }
 
