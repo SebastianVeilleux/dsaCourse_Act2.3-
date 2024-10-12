@@ -144,7 +144,7 @@ MyNodoLL* Registro::MergeSort(MyNodoLL* head) {
 }
 
 void Registro::ordenar(){
-    MergeSort(this->head);
+    this-> head = MergeSort(this->head);
 }
 
 void Registro::ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp){
