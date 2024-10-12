@@ -1,7 +1,9 @@
 //Héctor Eduardo Ayala Gudiño A01638996
 //Luis Fernando Rojo Valdes A01640584
+// Sebastian Alejandro Veilleux Amaya A01644977
 #ifndef REGISTRO_H
 #define REGISTRO_H
+
 
 #include "Error.h"
 
@@ -28,9 +30,14 @@ class Registro{
     public:
         Registro();
         void leerRegistro();
-        void mezcla(int ini, int central, int fin);//cambiar para listas enlazadas
-        void ordenar(int ini, int fin);//cambiar para listas enlazadas
-        void ordenar();//cambiar para listas enlazadas
+        MyNodoLL* findMiddle(MyNodoLL* head);
+        MyNodoLL* Merge(MyNodoLL* first, MyNodoLL* second);
+        MyNodoLL* MergeSort(MyNodoLL* head);
+        // MERGE PASADO
+            //void mezcla(int ini, int central, int fin);
+            //void ordenar(int ini, int fin);
+            //void ordenar();
+        //
         void crearArchivo();
         void crearArchivoEspecifico(string busqI, string busqF);//cambiar para listas enlazadas
         void ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp);
