@@ -230,9 +230,6 @@ void Registro::crearArchivoEspecifico(string busqI, string busqF){
     strNumBusq = to_string(this->numBusq);
     MyNodoLL* current; 
     current = sequentialSearch(busqI);
-    if (current == nullptr){
-        current = this->head;
-    }
 
     int pIpF;
     int sIpF;
