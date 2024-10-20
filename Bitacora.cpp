@@ -128,6 +128,7 @@ MyNodoLL* Registro::findMiddle(MyNodoLL* head){
     return slow;
 }
 
+//  Funcion tomada de GeeksForGeeks
 MyNodoLL* Registro::MergeSort(MyNodoLL* head) {
     // caso base: si la lista está vacía o tiene solo un nodo, ya está ordenada
     if (head == nullptr || head->next == nullptr)
