@@ -4,8 +4,8 @@
 #include "Error.h"
 #include "Bitacora.h"
 
-// g++ main.cpp Registro.cpp Error.cpp && ./a.out
-// g++ main.cpp Error.cpp Registro.cpp && .\a.exe
+// g++ main.cpp Bitacora.cpp Error.cpp && ./a.out
+// g++ main.cpp Error.cpp Bitacora.cpp && .\a.exe
 
 //Funcion para validar el input de la IP
 bool isValidIP(string busq) {
@@ -20,10 +20,10 @@ bool isValidIP(string busq) {
 
 int main()
 {
-    Registro r1;
-    r1.leerRegistro();
-    r1.ordenar();
-    r1.crearArchivo();
+    Bitacora b1;
+    b1.leerBitacora();
+    b1.ordenar();
+    b1.crearArchivo();
     string respuesta;
     
     while(respuesta != "s"){
@@ -43,7 +43,7 @@ int main()
             }
         } while (!isValidIP(busqF));
         
-        r1.crearArchivoEspecifico(busqI, busqF);
+        b1.crearArchivoEspecifico(busqI, busqF);
         cout<< "Archivo creado con exito"<<endl;
         cout << "Desea realizar otra busqueda? (s/n)" << endl;
         cin >> respuesta;

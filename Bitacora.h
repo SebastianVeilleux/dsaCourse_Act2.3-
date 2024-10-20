@@ -1,8 +1,8 @@
 //Héctor Eduardo Ayala Gudiño A01638996
 //Luis Fernando Rojo Valdes A01640584
 // Sebastian Alejandro Veilleux Amaya A01644977
-#ifndef REGISTRO_H
-#define REGISTRO_H
+#ifndef BITACORA_H
+#define BITACORA_H
 
 
 #include "Error.h"
@@ -21,15 +21,15 @@ struct MyNodoLL{
     MyNodoLL(Error *error):MyNodoLL(error,nullptr){}
 };
 
-class Registro{
+class Bitacora{
     private:
         int numBusq = 1;
         int size = 0;
         MyNodoLL *head,
         *tail;
     public:
-        Registro();
-        void leerRegistro();
+        Bitacora();
+        void leerBitacora();
         MyNodoLL* findMiddle(MyNodoLL* head);
         MyNodoLL* Merge(MyNodoLL* first, MyNodoLL* second);
         MyNodoLL* MergeSort(MyNodoLL* head);

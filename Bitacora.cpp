@@ -4,9 +4,9 @@
 #include "Bitacora.h"
 #include "Error.h"
 
-Registro::Registro() : head(nullptr), tail(nullptr), size(0) {}
+Bitacora::Bitacora() : head(nullptr), tail(nullptr), size(0) {}
 
-/*Registro::~Registro() {
+/*Bitacora::~Bitacora() {
     MyNodoLL* current = head;
     while (current != nullptr) {
         MyNodoLL* next = current->next;
@@ -16,7 +16,7 @@ Registro::Registro() : head(nullptr), tail(nullptr), size(0) {}
     }
 }*/
 
-void Registro::leerRegistro(){
+void Bitacora::leerBitacora(){
     ifstream archivoVideos("bitacora.txt");
     string linea;
     stringstream ss(linea);
@@ -67,7 +67,7 @@ void Registro::leerRegistro(){
     archivoVideos.close();
 }
 
-MyNodoLL* Registro::Merge(MyNodoLL* left, MyNodoLL* right) {
+MyNodoLL* Bitacora::Merge(MyNodoLL* left, MyNodoLL* right) {
     if (left == nullptr) return right;
     if (right == nullptr) return left;
 
@@ -113,7 +113,7 @@ MyNodoLL* Registro::Merge(MyNodoLL* left, MyNodoLL* right) {
 }
 
 
-MyNodoLL* Registro::findMiddle(MyNodoLL* head){
+MyNodoLL* Bitacora::findMiddle(MyNodoLL* head){
     if (head == nullptr || head->next == nullptr)
         return head;
     
@@ -129,7 +129,7 @@ MyNodoLL* Registro::findMiddle(MyNodoLL* head){
 }
 
 //  Funcion tomada de GeeksForGeeks
-MyNodoLL* Registro::MergeSort(MyNodoLL* head) {
+MyNodoLL* Bitacora::MergeSort(MyNodoLL* head) {
     // caso base: si la lista está vacía o tiene solo un nodo, ya está ordenada
     if (head == nullptr || head->next == nullptr)
         return head;
@@ -144,11 +144,11 @@ MyNodoLL* Registro::MergeSort(MyNodoLL* head) {
     return Merge(left, right);
 }
 
-void Registro::ordenar(){
+void Bitacora::ordenar(){
     this-> head = MergeSort(this->head);
 }
 
-void Registro::ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp){
+void Bitacora::ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp){
     istringstream split(busq);
     string strPIp, strSIp, strTIp, strCIp;
 
@@ -162,7 +162,7 @@ void Registro::ipAInt(string busq, int* pIp, int* sIp, int* tIp, int* cIp){
     *cIp = stoi(strCIp);
 }
 
-MyNodoLL* Registro::sequentialSearch(string busq){
+MyNodoLL* Bitacora::sequentialSearch(string busq){
     int pIp;
     int sIp;
     int tIp;
@@ -194,7 +194,7 @@ MyNodoLL* Registro::sequentialSearch(string busq){
     return nullptr;
 }
 
-/*MyNodoLL* Registro::sequentialSearchFin(string busq, MyNodoLL* nodo){
+/*MyNodoLL* Bitacora::sequentialSearchFin(string busq, MyNodoLL* nodo){
     int pIp;
     int sIp;
     int tIp;
@@ -214,7 +214,7 @@ MyNodoLL* Registro::sequentialSearch(string busq){
     return nodo;
 }*/
 
-void Registro::crearArchivo(){
+void Bitacora::crearArchivo(){
     MyNodoLL* current; 
     current = head;
     ofstream file;
@@ -226,7 +226,7 @@ void Registro::crearArchivo(){
     file.close();
 }
 
-void Registro::crearArchivoEspecifico(string busqI, string busqF){
+void Bitacora::crearArchivoEspecifico(string busqI, string busqF){
     string strNumBusq;
     strNumBusq = to_string(this->numBusq);
     MyNodoLL* current; 
