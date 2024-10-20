@@ -1,7 +1,7 @@
 //Héctor Eduardo Ayala Gudiño A01638996
 //Luis Fernando Rojo Valdes A01640584
 // Sebastian Alejandro Veilleux Amaya A01644977
-#include "Registro.h"
+#include "Bitacora.h"
 #include "Error.h"
 
 Registro::Registro() : head(nullptr), tail(nullptr), size(0) {}
