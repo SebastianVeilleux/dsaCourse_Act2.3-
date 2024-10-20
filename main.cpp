@@ -2,7 +2,7 @@
 //Luis Fernando Rojo Valdes A01640584
 // Sebastian Alejandro Veilleux Amaya A01644977
 #include "Error.h"
-#include "Registro.h"
+#include "Bitacora.h"
 
 // g++ main.cpp Registro.cpp Error.cpp && ./a.out
 // g++ main.cpp Error.cpp Registro.cpp && .\a.exe
