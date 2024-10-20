@@ -24,8 +24,9 @@ int main()
     r1.leerRegistro();
     r1.ordenar();
     r1.crearArchivo();
+    string respuesta;
     
-    while(true){
+    while(respuesta != "s"){
         string busqI, busqF;
         do {
             std::cout << "Teclee la IP de inicio de la busqueda (###.###.###.###): " << std::endl;
@@ -45,11 +46,7 @@ int main()
         r1.crearArchivoEspecifico(busqI, busqF);
         cout<< "Archivo creado con exito"<<endl;
         cout << "Desea realizar otra busqueda? (s/n)" << endl;
-        string respuesta;
         cin >> respuesta;
-        if (respuesta != "s") {
-            break;
-        }
         cin.ignore();
     }
 
