@@ -252,7 +252,7 @@ void Bitacora::crearArchivoEspecifico(string busqI, string busqF){
                 if (current->error->getTIp() < tIpF) { 
                     file << current->error->imprimeError(); 
                 } else if (current->error->getTIp() == tIpF) { 
-                    if (current->error->getCIp() < cIpF) { 
+                    if (current->error->getCIp() <= cIpF) { 
                         file << current->error->imprimeError(); 
                     } else { 
                         break; 

@@ -26,7 +26,7 @@ int main()
     b1.crearArchivo();
     string respuesta;
     
-    while(respuesta != "s"){
+    while(respuesta != "n"){
         string busqI, busqF;
         do {
             std::cout << "Teclee la IP de inicio de la busqueda (###.###.###.###): " << std::endl;
