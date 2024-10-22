@@ -112,7 +112,7 @@ MyNodoLL* Bitacora::Merge(MyNodoLL* left, MyNodoLL* right) {
     }
 }
 
-
+// Geeks for geeks function
 MyNodoLL* Bitacora::findMiddle(MyNodoLL* head){
     if (head == nullptr || head->next == nullptr)
         return head;
